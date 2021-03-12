@@ -10,6 +10,11 @@ server.use(express.json())
 
 // Routes
 server.use('/api/actions', actionsRouter)
-server.use('/api/project', projectsRouter)
+server.use('/api/projects', projectsRouter)
+
+// Catch all
+server.use('*', (req, res) => {
+  res.send('<h1>The server is running</h1>')
+})
 
 module.exports = server;
