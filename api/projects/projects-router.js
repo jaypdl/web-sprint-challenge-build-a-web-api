@@ -41,6 +41,15 @@ router.post('/', checkValidProject, async (req, res, next) => {
 })
 
 // [PUT] /:id (Updates project with given id, returns updated project)
+router.put('/:id', checkProjectId, checkValidProject, async (req, res, next) => {
+  const { id } = req.params
+  try {
+    const updatedProject = await Project.update(id, req.body)
+    res.json(updatedProject)
+  } catch (err) {
+    next(err)
+  }
+})
 
 // [DELETE] /:id (Deletes project at given id, no response)
 

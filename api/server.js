@@ -12,9 +12,14 @@ server.use(express.json())
 server.use('/api/actions', actionsRouter)
 server.use('/api/projects', projectsRouter)
 
-// Catch all
-server.use('*', (req, res) => {
+server.get('/', (req, res) => {
   res.send('<h1>The server is running</h1>')
 })
+
+// Catch all
+server.use('*', (req, res) => {
+  res.status(404).json({ message: `Sorry, this is not a valid location for a ${req.method} request`})
+})
+
 
 module.exports = server;
