@@ -51,7 +51,6 @@ router.delete('/:id', checkActionId, async (req, res, next) => {
   }
 })
 
-
 // Error Catching
 router.use((err, req, res, next) => { // eslint-disable-line
   res.status(500).json({
