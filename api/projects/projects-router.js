@@ -1,12 +1,24 @@
 // Write your "projects" router here!
 const express = require('express')
-
+const Project = require('./projects-model')
+const { checkProjectId } = require('./projects-middleware')
 const router = express.Router()
 
 /**** BASE ROUTE /api/projects ****/
 // [GET] / (Return array of projects)
+router.get('/', async (req, res, next) =>{
+  try {
+    const projects = await Project.get()
+    res.json(projects)
+  } catch (err) {
+    next(err)
+  }
+})
 
 // [GET] /:id (Return project with given id)
+// router.get('/:id', checkProjectId (req, res) => {
+
+// })
 
 // [GET] /:id/actions (Returns actions for given project)
 
