@@ -52,6 +52,14 @@ router.put('/:id', checkProjectId, checkValidProject, async (req, res, next) => 
 })
 
 // [DELETE] /:id (Deletes project at given id, no response)
+router.delete('/:id', checkProjectId, async (req, res, next) => {
+  try {
+    await Project.remove(req.params.id)
+    res.json()
+  } catch (err) {
+    next(err)
+  }
+})
 
 // Error Catching
 router.use((err, req, res, next) => { // eslint-disable-line
