@@ -42,7 +42,6 @@ router.post('/', checkValidProject, async (req, res, next) => {
 
 // [PUT] /:id (Updates project with given id, returns updated project)
 
-
 // [DELETE] /:id (Deletes project at given id, no response)
 
 // Error Catching
