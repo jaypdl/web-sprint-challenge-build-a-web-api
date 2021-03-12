@@ -17,5 +17,7 @@ const server = require('./api/server')
 const PORT = process.env.PORT || 4000
 
 server.listen(PORT, () => {
-  console.log(`\n***** The Server Is JUDGING YOU on Port ${PORT} 😲 *****\n`)
+  console.log(`\n***** The Server Is JUDGING YOU on Port ${PORT} 😲 *****\n***** Also, the server is deployed to https://web-api-sc.herokuapp.com/ *****`)
 })
+
+// Deployed to Heroku at https://web-api-sc.herokuapp.com/
