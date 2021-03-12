@@ -20,7 +20,6 @@ if (!req.body.project_id || !req.body.description || !req.body.notes) {
   } else {
     next()
   }
-  console.log (req.method)
 }
 
 module.exports = {

@@ -1,7 +1,7 @@
 // Write your "projects" router here!
 const express = require('express')
 const Project = require('./projects-model')
-const { checkProjectId } = require('./projects-middleware')
+const { checkProjectId, checkValidProject } = require('./projects-middleware')
 const router = express.Router()
 
 /**** BASE ROUTE /api/projects ****/
@@ -16,20 +16,36 @@ router.get('/', async (req, res, next) =>{
 })
 
 // [GET] /:id (Return project with given id)
-// router.get('/:id', checkProjectId (req, res) => {
-
-// })
+router.get('/:id', checkProjectId, (req, res) => {
+  res.json(req.projectRequested)
+})
 
 // [GET] /:id/actions (Returns actions for given project)
+router.get('/:id/actions', checkProjectId, async (req, res, next) => {
+  try {
+    const actions = await Project.getProjectActions(req.params.id)
+    res.json(actions)
+  } catch (err) {
+    next(err)
+  }
+})
 
 // [POST] / (Creates new project, returns new project)
+router.post('/', checkValidProject, async (req, res, next) => {
+  try {
+    const newProject = await Project.insert(req.body)
+    res.json(newProject)
+  } catch (err) {
+    next(err)
+  }
+})
 
 // [PUT] /:id (Updates project with given id, returns updated project)
 
 // [DELETE] /:id (Deletes project at given id, no response)
 
 // Error Catching
-router.use((err, req, res, next) => {
+router.use((err, req, res, next) => { // eslint-disable-line
   res.status.json({
     custom: 'Something went wrong in the projects router',
     message: err.message,
